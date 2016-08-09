@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   	root :to => 'store#index', :as => 'store'  
 	resources :products
+	resources :carts
+	resources :line_items
 	
 	
 end
