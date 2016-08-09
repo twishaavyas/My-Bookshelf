@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-rotect_from_forgery with: :exception
+protect_from_forgery with: :exception
 	def show
 		@product = Product.find(params[:id])
 	end
