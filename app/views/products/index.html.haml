@@ -1,0 +1,53 @@
+/ %h1 Listing Articles
+
+/ %table
+/ 	%tr
+/ 		%th Title
+/ 		%th Description
+/ 		%th Image_url
+/ 		%th Price
+
+/ 	-@products.each do |product|
+/ 		%tr
+/ 			%td= product.title
+/ 			%td= product.description
+/ 			%td= product.image_url
+/ 			%td= product.price
+%h1 Listing products
+%table
+	- @products.each do |product|
+		%tr{:class => cycle('list_line_odd', 'list_line_even')}
+			%td
+				= image_tag(product.image_url, :class => 'list_image')
+				%td.list_description
+					%dl
+						%dt= product.title
+						%dd= truncate(strip_tags(product.description), :length => 80)                            
+			%td.list_actions
+				= link_to 'Show', product
+					
+				= link_to 'Edit', edit_product_path(product)
+				= link_to 'Destroy', product,  :confirm => 'Are you sure?', :method => :delete
+= link_to 'New article', new_product_path
+
+
+/ %h1 Listing articles
+/        
+/ %table
+/  %tr
+/    %th Title
+/    %th Text
+
+/  -@articles.each do |article|
+/    %tr
+/      %td 
+/        =article.title 
+/      %td 
+/        =article.text
+/      %br
+/      %td 
+/        = link_to 'Show', article_path(article) 
+/      %td
+/        =link_to 'Edit',edit_article_path(article)
+/      %td
+/        =link_to 'Destroy',article_path(article),method: :delete, data:{confirm: "Are You Sure"}
