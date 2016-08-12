@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   	get "store/index"
 
   	root :to => 'store#index', :as => 'store'  
+  	resources :orders
 	resources :products
 	resources :carts
 	resources :line_items
