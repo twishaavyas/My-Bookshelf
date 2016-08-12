@@ -20,6 +20,20 @@
         %a{:href => "http://www..../news"} News
         %br/
         %a{:href => "http://www..../contact"} Contact
-        %br/
+        %br
+        - if session[:user_id]
+          %br
+          = link_to 'Orders', orders_path       
+          %br
+          = link_to 'Products', products_path
+          %br
+          = link_to 'Users', users_path       
+          %br
+          %br
+          = button_to 'Logout', logout_path, :method => :delete
+        -else
+          %br
+          = button_to 'Login', new_user_path, method: :get 
+                                                
       #main
         = yield

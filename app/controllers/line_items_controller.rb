@@ -1,4 +1,5 @@
 class LineItemsController < ApplicationController
+	skip_before_filter :authorize, :only => :create
 	protect_from_forgery with: :exception
 	def show
 		@line_item = Line_item.find(params[:id])
