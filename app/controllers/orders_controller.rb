@@ -28,6 +28,7 @@ protect_from_forgery with: :exception
 		if @order.save
 			Cart.destroy(session[:cart_id])
 			session[:cart_id] = nil
+			#NotifierMailer.order_received(@order).deliver
 			redirect_to @order
 		else
 			render 'new'
