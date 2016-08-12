@@ -33,7 +33,8 @@
           = button_to 'Logout', logout_path, :method => :delete
         -else
           %br
-          = button_to 'Login', new_user_path, method: :get 
+          = button_to 'Login', login_path, method: :get 
+        = button_to 'Create new user', new_user_path, method: :get
                                                 
       #main
         = yield

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	protect_from_forgery with: :exception
-	
+	skip_before_filter :authorize 
+
 	def show
 		@user = User.find(params[:id])
 	end
@@ -53,8 +54,11 @@ class UsersController < ApplicationController
 
 	def destroy
 		@user = User.find(params[:id])
-		@user.destroy
-		redirect_to users_path
+		begin
+			@user.destroy
+			flash[:notice] = "User #{@user.name} deleted"
+		    redirect_to users_path
+		end
 	end
 
 	private
