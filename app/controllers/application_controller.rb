@@ -11,11 +11,26 @@ class ApplicationController < ActionController::Base
 		@cart
 	end
 
+	def current_user
+		@user = User.find(session[:user_id])
+		@user
+	
+	end
+
 	protected
 		def authorize
-			unless User.find_by_id(session[:user_id])
-				redirect_to login_url, :notice => "Please log in"
+			user= User.find_by_id(session[:user_id])
+			unless user.admin?
+				redirect_to store_path, :notice => "Logged in as User"
+	
 			end
 		end
+
+	 # def require_admin
+  #    	unless current_user && current_user.admin?
+  #      		flash[:error] = "You are not an admin"
+  #      		redirect_to login_path
+  #    	end        
+  #  	end
 
 end

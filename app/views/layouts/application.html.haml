@@ -21,7 +21,7 @@
         %br/
         %a{:href => "http://www..../contact"} Contact
         %br
-        - if session[:user_id]
+        - if session[:user_id] 
           %br
           = link_to 'Orders', orders_path       
           %br

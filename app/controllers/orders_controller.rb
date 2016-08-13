@@ -23,7 +23,9 @@ class OrdersController < ApplicationController
 	end
 
 	def create
+		puts order_params
 		@order = Order.new(order_params)
+		puts @order
 		@order.add_line_items_from_cart(current_cart)
 		if @order.save
 			Cart.destroy(session[:cart_id])
@@ -36,7 +38,9 @@ class OrdersController < ApplicationController
 	end
 
 	def update
+		puts params
 		@order = Order.find(params[:id])
+		puts @order
 		if @order.update(order_params)
 			redirect_to @order
 		else
