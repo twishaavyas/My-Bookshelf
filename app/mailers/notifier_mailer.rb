@@ -19,9 +19,11 @@ class NotifierMailer < ApplicationMailer
   #
   #   en.notifier_mailer.order_shipped.subject
   #
-  def order_shipped
-    @greeting = "Hi"
+  def order_shipped(order)
+    @order = order
+    
+    mail to: order.email, :subject => 'Pragmatic Store Order Shipped'   
 
-    mail to: "to@example.org"
+    
   end
 end
