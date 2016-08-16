@@ -12,8 +12,18 @@ class ApplicationController < ActionController::Base
 		@cart
 	end
 
+	 def current_order
+	 	@order = Order.find_by(user_id: session[:user_id])
+	 end
+
 	def current_user
 		@user = User.find(session[:user_id])
+		# if !@user.present?
+		# 	@user = User.create
+		# else
+		# 	@user = User.find(session[:user_id])
+		# end
+		# session[:user_id] = @user.id
 		@user
 	
 	end

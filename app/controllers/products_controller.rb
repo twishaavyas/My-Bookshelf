@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+skip_before_filter :authorize
 protect_from_forgery with: :exception
 	def show
 		@product = Product.find(params[:id])

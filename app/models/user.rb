@@ -3,6 +3,7 @@
 require 'digest/sha2'
 class User < ActiveRecord::Base
 	has_many :carts
+	has_many :orders
 	# after_destroy :ensure_an_admin_remains
 	validates :name, :presence => true, :uniqueness => true
 	validates :password, :confirmation => true

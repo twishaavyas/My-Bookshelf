@@ -1,10 +1,12 @@
 class OrdersController < ApplicationController
 	
-	skip_before_filter :authorize, :only => [:new, :create, :destroy]
+	skip_before_filter :authorize, :only => [:new, :create, :destroy, :previous_orders]
 	protect_from_forgery with: :exception
 	def show
 		@order = Order.find(params[:id])
-	end
+  	end
+	
+	
 
 	def edit
 		@order = Order.find(params[:id])
@@ -14,17 +16,26 @@ class OrdersController < ApplicationController
 		@orders = Order.all
 	end
 
+	def previous_orders
+		user = User.find(params[:id])
+		if !(user == current_user)
+			redirect_to store_path
+		else
+			@orders = current_user.orders.all
+		end
+	end
+
 	def new
 		if current_cart.line_items.empty?
 			redirect_to store_url, :notice => "Your cart is empty"
 			return
 		end
-		@order = Order.new
+		@order = current_user.orders.new
 	end
 
 	def create
 		puts order_params
-		@order = Order.new(order_params)
+		@order = current_user.orders.new(order_params)
 		puts @order
 		@order.add_line_items_from_cart(current_cart)
 		if @order.save
