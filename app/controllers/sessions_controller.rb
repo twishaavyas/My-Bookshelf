@@ -7,6 +7,9 @@ class SessionsController < ApplicationController
   	user = User.authenticate(params[:name], params[:password])
   	if user.present?
   		session[:user_id] = user.id
+  		puts "=================================================================="
+  		puts current_cart
+  		puts "-------------------------------------------------------------------"
   		redirect_to admin_url
   	else
   		redirect_to login_url

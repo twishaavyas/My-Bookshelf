@@ -30,12 +30,6 @@ class CartsController < ApplicationController
 	end
 
 	def create
-		@cart = Cart.new(cart_params)
-		if @cart.save
-			redirect_to @cart
-		else
-			render 'new'
-		end
 	end
 
 	def update

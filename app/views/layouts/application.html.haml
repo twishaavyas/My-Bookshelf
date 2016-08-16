@@ -12,7 +12,8 @@
     #columns
       #side
         #cart
-          =render @cart
+          -if @cart.present?
+            =render @cart
         %a{:href => "http://www...."} Home
         %br/
         %a{:href => "http://www..../faq"} Questions

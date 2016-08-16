@@ -2,11 +2,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :current_cart
   before_filter :authorize
-  private
+ 
 	def current_cart
-		@cart = Cart.find(session[:cart_id])
-	rescue ActiveRecord::RecordNotFound
-		@cart = Cart.create
+		@cart = Cart.find_by(user_id: session[:user_id])
+		if !@cart.present?
+			@cart = current_user.carts.create
+		end	
 		session[:cart_id] = @cart.id
 		@cart
 	end
@@ -25,7 +26,7 @@ class ApplicationController < ActionController::Base
 	
 			end
 		end
-
+end
 	 # def require_admin
   #    	unless current_user && current_user.admin?
   #      		flash[:error] = "You are not an admin"
@@ -33,4 +34,3 @@ class ApplicationController < ActionController::Base
   #    	end        
   #  	end
 
-end
