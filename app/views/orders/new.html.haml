@@ -1,3 +1,28 @@
+
+
+%p
+  %b Items in Order:
+  
+  -@line_item = @cart.line_items.all
+  -@line_item.each do |l|
+    %table
+      %tr
+        /%th Name
+        /%th
+        /%th Quantity
+      %td= Product.find_by(id: l.product_id).title
+      %th x
+      %td= l.quantity
+      %th = $
+      %td= (l.quantity) * Product.find_by(id: l.product_id).price
+      - @new = ((l.quantity) * Product.find_by(id: l.product_id).price).to_f + @new.to_f
+    
+%p
+  %b Total price: $
+  = @new 
+     
+/= link_to 'Edit', edit_order_path(@order)
+
 .depot_form
   %fieldset
     %legend Please Enter Your Details
