@@ -1,5 +1,5 @@
 class LineItemsController < ApplicationController
-	#skip_before_filter :authorize, :only => [:create, :destroy]
+	skip_before_filter :authorize, :only => [:create, :destroy, :update, :increase_item, :decrease_item]
 	def show
 		@line_item = Line_item.find(params[:id])
 	end
@@ -24,7 +24,7 @@ class LineItemsController < ApplicationController
 		respond_to do |format|
 			if @line_item.save
 				format.html { redirect_to(store_url) }
-				format.js { @current_item = @line_item}
+				format.js 
 				format.xml { render :xml => @line_item,
 				:status => :created, :location => @line_item }
 			else	

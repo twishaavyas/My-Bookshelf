@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 	
-	skip_before_filter :authorize, :only => [:new, :create, :destroy, :previous_orders]
+	skip_before_filter :authorize, :only => [:new, :create, :destroy, :previous_orders, :show]
 	protect_from_forgery with: :exception
 	def show
 		@order = Order.find(params[:id])
