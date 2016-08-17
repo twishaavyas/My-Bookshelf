@@ -7,3 +7,10 @@
 			\×
 		%td= line_item.product.title
 		%td.item_price= number_to_currency(line_item.total_price)
+		%td 
+			=button_to '+', increase_item_url(line_item), :remote => :true
+		%td
+			=button_to '-', decrease_item_url(line_item), :remote => :true
+		%td
+			/ =button_to 'x', line_item,  :action=> :destroy, :remote => :true
+			= button_to 'x', line_item, method: :delete, data: { confirm: 'Are you sure?' }

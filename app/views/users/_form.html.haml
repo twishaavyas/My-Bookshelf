@@ -21,4 +21,7 @@
         = f.label :password_confirmation, 'Confirm'
         =f.password_field :password_confirmation, :size => 40
       %div
-        = f.submit
+        =f.label :email, 'Email'
+        =f.email_field :email
+      %div
+        = f.submit "lol"

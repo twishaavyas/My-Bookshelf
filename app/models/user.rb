@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	# after_destroy :ensure_an_admin_remains
 	validates :name, :presence => true, :uniqueness => true
 	validates :password, :confirmation => true
+  validates :email, :presence => true
 	attr_accessor :password_confirmation
 	attr_reader :password
 	validate 	:password_must_be_present
@@ -39,4 +40,4 @@ class User < ActiveRecord::Base
 		def generate_salt
 			self.salt = self.object_id.to_s + rand.to_s
 		end
-	end
+end

@@ -17,7 +17,7 @@
           / -else
           /   = link_to 'Orders', orders_path
           
-        %a{:href => "http://www...."} Home
+        /%a{:href => "http://www...."} Home
         %br/
         %a{:href => "http://www..../faq"} Questions
         %br/
@@ -47,8 +47,8 @@
         -else
           %br
           = button_to 'Login', login_path, method: :get 
-        = button_to 'Create new user', new_user_path, method: :get
-        = link_to 'Back', store_path 
+          = button_to 'Create new user', new_user_path, method: :get
+        = link_to 'HOME', store_path 
                                                 
       #main
         = yield

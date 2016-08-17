@@ -1,6 +1,5 @@
 class LineItemsController < ApplicationController
-	skip_before_filter :authorize, :only => :create
-	protect_from_forgery with: :exception
+	#skip_before_filter :authorize, :only => [:create, :destroy]
 	def show
 		@line_item = Line_item.find(params[:id])
 	end
@@ -45,11 +44,30 @@ class LineItemsController < ApplicationController
 		end
 	end
 
-	def destroy
-		@line_item = Line_item.find(params[:id])
-		@line_item.destroy
-		redirect_to line_items_path
+	def increase_item
+		@line_item = LineItem.find(params[:id])
+		@line_item.quantity += 1
+		@line_item.save
+		redirect_to store_path
 	end
+
+	def decrease_item
+		@line_item = LineItem.find(params[:id])
+		if @line_item.quantity > 1
+			@line_item.quantity -= 1
+		else
+			@line_item.destroy
+		end
+		@line_item.save
+		redirect_to store_path
+	end
+
+	def destroy
+		@line_item = LineItem.find(params[:id])
+		@line_item.destroy
+		redirect_to store_path
+	end
+	
 
 	private
 		def line_item_params

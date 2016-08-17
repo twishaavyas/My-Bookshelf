@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 		respond_to do |format|
 			if @user.save
-				format.html { redirect_to(users_url,
+				format.html { redirect_to(store_url,
 				:notice => "User #{@user.name} was successfully created.") }
 				format.xml { render :xml => @user,
 				:status => :created, :location => @user }
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 
 	private
 		def user_params
-			params.require(:user).permit(:name ,:password,:password_confirmation)
+			params.require(:user).permit(:name ,:password,:password_confirmation, :email)
 		end
 
 end
