@@ -26,11 +26,11 @@
       %td= l.quantity
       %th = $
       %td= (l.quantity) * Product.find_by(id: l.product_id).price
-      - @new = ((l.quantity) * Product.find_by(id: l.product_id).price)
+      - @new = ((l.quantity) * Product.find_by(id: l.product_id).price).to_f + @new.to_f
     
 %p
-  %b Total price
-  = @new * 2
+  %b Total price: $
+  = @new 
      
 /= link_to 'Edit', edit_order_path(@order)
 =link_to 'Back', orders_path
